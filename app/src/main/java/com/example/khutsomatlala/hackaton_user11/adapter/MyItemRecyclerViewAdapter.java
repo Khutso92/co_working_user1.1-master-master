@@ -73,16 +73,13 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
                 String price = Long.toString(mValues.get(position).getPlaceDetails().getPrice());
 
-                String feat1Pic= mValues.get(position).getFeatures().get(0).getTitle();
-                String feat2Pic= mValues.get(position).getFeatures().get(1).getTitle();
-                String feat3Pic= mValues.get(position).getFeatures().get(2).getTitle();
+                String feat1Pic= mValues.get(position).getFeatures().get(0).getImageUrl();
+                String feat2Pic= mValues.get(position).getFeatures().get(1).getImageUrl();
+                String feat3Pic= mValues.get(position).getFeatures().get(2).getImageUrl();
 
                 String feat1Title = mValues.get(position).getFeatures().get(0).getTitle();
                 String feat2Title = mValues.get(position).getFeatures().get(1).getTitle();
                 String feat3Title = mValues.get(position).getFeatures().get(2).getTitle();
-
-
-
 
                 intent.putExtra("lat", lat);
                 intent.putExtra("lon", lon);
@@ -99,12 +96,11 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
                 intent.putExtra("feat1Pic",feat1Pic);
                 intent.putExtra("feat2Pic",feat2Pic);
-                intent.putExtra("feat3ic",feat3Pic);
+                intent.putExtra("feat3Pic",feat3Pic);
 
                 intent.putExtra("feat1Title",feat1Title);
                 intent.putExtra("feat2Title",feat2Title);
                 intent.putExtra("feat3Title",feat3Title);
-
                 activity.startActivity(intent);
             }
         });

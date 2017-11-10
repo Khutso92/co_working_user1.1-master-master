@@ -1,35 +1,22 @@
 package com.example.khutsomatlala.hackaton_user11;
 
 import android.app.DatePickerDialog;
-
 import android.app.TimePickerDialog;
-
 import android.content.Intent;
-
 import android.os.Build;
-
 import android.os.Bundle;
-
 import android.support.annotation.RequiresApi;
-
 import android.support.v7.app.AppCompatActivity;
-
 import android.text.TextUtils;
 import android.view.View;
-
 import android.widget.Button;
-
 import android.widget.DatePicker;
-
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
 import android.widget.TimePicker;
-
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -40,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -59,7 +45,7 @@ public class book_new extends AppCompatActivity {
 
     String duration;
 
-    Boolean TimeIn = false, TimeOut = false, Calculate = false, dateEntered = false, one = false, more = false;
+    Boolean TimeIn = false, TimeOut = false,   dateEntered = false, one = false, more = false;
 
     private static int HOUR_PRICE = 20;
 
@@ -71,13 +57,13 @@ public class book_new extends AppCompatActivity {
 
     static final int DATE_DIALOG_ID = 0;
 
-    String pic, date1, name, pricee, mTimeIn, mTimeOut, mDate, mEmail,mUsername;
+    String pic, date1, name, pricee, mTimeIn, mTimeOut, mDate, mEmail, mUsername;
 
     ImageView BookPic;
 
 
     TextView placeName, mPrice, tv_date, txtTotalPrice;
-    String dayStamp = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
+    String dayStamp = new SimpleDateFormat("yyyy - MM - dd").format(new Date());
 
     //Time and date picker
     DateFormat formatDateTime = DateFormat.getDateTimeInstance();
@@ -105,11 +91,11 @@ public class book_new extends AppCompatActivity {
     RadioButton MorePeople, onePerson;
     RadioGroup radioGroup;
     EditText PeopleNumber;
-    String   numberOfPeople;
+    String numberOfPeople,user_uid;
 
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference   mAvailabilityReference;
+    private DatabaseReference mAvailabilityReference, mcheckAvailityRef;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
 
@@ -125,18 +111,17 @@ public class book_new extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         mAvailabilityReference = mFirebaseDatabase.getReference().child("availability");
+
+        mcheckAvailityRef = mFirebaseDatabase.getReference().child("places");
+
         Intent i = getIntent();
 
         pic = i.getStringExtra("pic");
-
         name = i.getStringExtra("name");
-
         pricee = i.getStringExtra("price");
-
         mEmail = i.getStringExtra("email");
         mUsername = i.getStringExtra("mUsername");
-
-
+        user_uid = i.getStringExtra("user_uid");
 
 
         mPrice = (TextView) findViewById(R.id.txtPrice);
@@ -402,48 +387,16 @@ public class book_new extends AppCompatActivity {
 
     public void email(View view) {
 
-    /*    if (TimeOut && TimeOut & dateEntered & (one || more)) {
-
-            mBookingInfor = "Date - " + mDate + "\n"
-                    + "Time in - " + mTimeIn + "\n"
-                    + "Time out - " + mTimeOut + "\n"
-                    + "Number of people - " + numberOfPeople + "\n"
-                    + "Price - R" + mTotal + "0";
-
-            Intent email = new Intent(Intent.ACTION_SEND);
-
-            email.putExtra(Intent.EXTRA_EMAIL, new String[]{mEmail});
-
-            email.putExtra(Intent.EXTRA_SUBJECT, " Space booking  for " + name);
-
-            email.putExtra(Intent.EXTRA_TEXT, mBookingInfor);
-
-            email.setType("message/rfc822");
-
-            startActivity(Intent.createChooser(email, "choose an Email client"));
-
-        } else
-
-        {
-
-            Toast.makeText(this, "Fill all the  fields", Toast.LENGTH_SHORT).show();
-
-        }
-
-
-
-*/
-
-
+        // check  from the main node
         mAvailabilityReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 mAvailabilityReference.child(name).child("book_day").setValue(dayStamp);
-                mAvailabilityReference.child(name).child("Bookings").child("user_id").setValue(mUsername);
+                mAvailabilityReference.child(name).child("Bookings").child(user_uid).setValue(mUsername);
                 mAvailabilityReference.child(name).child("Bookings").child("start_time").setValue(mHoursIn);
                 mAvailabilityReference.child(name).child("Bookings").child("end_time").setValue(mHoursOut);
-                String time = ""+ mHoursIn + mHoursOut;
+                String time =  mHoursIn + " to " + mHoursOut;
                 mAvailabilityReference.child(name).child("hours_booked").setValue(time);
 
             }
@@ -453,7 +406,42 @@ public class book_new extends AppCompatActivity {
 
             }
         });
+
+        //Showing booked hours
+    /*    mcheckAvailityRef.child("-KwoltRpFt9i7wFjYsrb").child("availability").child("09-11-17").child("Bookings").child("booked").child("hours_booked").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+        Toast.makeText(book_new.this, "booked hours\n" + dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+*/
+
+
+
+        //who booked the space uid
+      /*  mcheckAvailityRef.child("-KwoltRpFt9i7wFjYsrb").child("availability").child("09-11-17").child("booking_id").child("user_id").child("name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Toast.makeText(book_new.this, " Who booked the space\n" + dataSnapshot.getValue() +"\n user ID" +user_uid, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
+
     }
+
+    //check availability from places node
 
     public void NumPeople(View view) {
 
@@ -486,11 +474,11 @@ public class book_new extends AppCompatActivity {
 
                         mTotal = mTotal * Integer.parseInt(pricee);
 
-                          numberOfPeople = PeopleNumber.getText().toString();
+                        numberOfPeople = PeopleNumber.getText().toString();
 
 
                         if (!TextUtils.isEmpty(numberOfPeople)) {
-                            txtTotalPrice.setText("R" + Math.abs( mTotal) * Integer.parseInt(numberOfPeople) + "0");
+                            txtTotalPrice.setText("R" + Math.abs(mTotal) * Integer.parseInt(numberOfPeople) + "0");
                         } else {
                             Toast.makeText(this, "enter number of people", Toast.LENGTH_SHORT).show();
                         }
@@ -501,7 +489,7 @@ public class book_new extends AppCompatActivity {
                 } else {
                     Toast.makeText(this, "Select a date", Toast.LENGTH_SHORT).show();
                 }
-                
+
                 break;
 
             case R.id.rb_onePerson:
@@ -528,7 +516,7 @@ public class book_new extends AppCompatActivity {
 
                     mTotal = mTotal * Integer.parseInt(pricee);
 
-                    txtTotalPrice.setText("R" +Math.abs(mTotal) + "0");
+                    txtTotalPrice.setText("R" + Math.abs(mTotal) + "0");
                 } else {
                     Toast.makeText(this, "Enter time in and out", Toast.LENGTH_SHORT).show();
                 }

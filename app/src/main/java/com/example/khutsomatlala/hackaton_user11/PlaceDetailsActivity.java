@@ -1,7 +1,6 @@
 package com.example.khutsomatlala.hackaton_user11;
 
 import android.content.Intent;
-import android.icu.text.DecimalFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +23,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -46,13 +46,13 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class PlaceDetailsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic;
+    String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic ,   uid;
     LinearLayout SendTextLinearLayout;
-    TextView placeName, placeLocation, txtInformation, Feat_1, Feat_2, Feat_3, ratingDisplayTextView, readAllReviews;
+    TextView placeName, placeLocation, txtInformation,   ratingDisplayTextView, readAllReviews;
 
-    ImageView feat1P, feat2P;
+    ImageView feat1P, feat2P, feat3P;
 
-    Button feat3P;
+
     ImageView PlacePic;
     RatingBar ratingRatingBar;
     long reviews;
@@ -67,7 +67,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
     private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
     private EditText mMessageEditText;
-    private Button mSendButton, mNumberReviews;
+    private Button mSendButton, ftitle1;
 
     private String mUsername, rateMessage;
 
@@ -94,7 +94,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
     int mTotalRating = 0;
     long mNumberofUser = 0;
     float mAverage = 0;
-    Button ratingStars;
+    Button ftitle2, ftitle3;
     RatingBar ratingBar;
 
 
@@ -134,39 +134,15 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
         // Toast.makeText(this, "today's date\n" +dayStamp, Toast.LENGTH_SHORT).show();
 
-        //Toast.makeText(this, "feat: " +"\n" + feat1Title +"\n" + feat2Title+"\n" + feat3Title, Toast.LENGTH_SHORT).show();
-
-//        txtHours = (TextView) findViewById(R.id.txtHours);
-
-
-//        Feat_1 = (TextView) findViewById(R.id.txtFeat_1);
-//        Feat_2 = (TextView) findViewById(R.id.txtFeat_2);
-//        Feat_3 = (TextView) findViewById(R.id.txtFeat_3);
-//
-//
-
-//        icon_2 = (ImageButton) findViewById(R.id.IBicon_2);
-//        icon_3 = (ImageView) findViewById(R.id.IBicon_3);
-
-
-//        Glide.with(this)
-//                .load(icon2)
-//                //  .override(300, 200)
-//                .centerCrop()
-//                .into(icon_2);
-//
-//        Glide.with(this)
-//                .load(icon3)
-//                //  .override(300, 200)
-//                .centerCrop()
-//                .into(icon_3);
-
 
         SendTextLinearLayout = findViewById(R.id.linearLayout);
         placeName = findViewById(R.id.txt_placeName);
         placeLocation = findViewById(R.id.txt_location);
         ratingBar = findViewById(R.id.rating_rating_bar);
-        mNumberReviews = findViewById(R.id.btn_reviews);
+
+        ftitle1 = findViewById(R.id.btn_reviews);
+        ftitle2 = findViewById(R.id.btn_ratingStars);
+        ftitle3 = findViewById(R.id.btn_title3);
 
         readAllReviews = findViewById(R.id.txtReadAll);
         txtInformation = findViewById(R.id.txtInformation);
@@ -176,29 +152,38 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         feat2P = findViewById(R.id.feat2Pic);
         feat3P = findViewById(R.id.feat3Pic);
 
+
         placeName.setText(PlaceName);
         placeLocation.setText(address);
         txtInformation.setText(" " + infor);
         SendTextLinearLayout.setVisibility(View.GONE);
 
-      /*  Glide.with(this)
+        ftitle1.setText("" + feat1Title);
+        ftitle2.setText("" + feat2Title);
+        ftitle3.setText("" + feat3Title);
+
+        Glide.with(this)
                 .load(pic1)
                 .centerCrop()
                 .into(PlacePic);
 
-
+        Glide.with(this)
+                .load(feat1Pic)
+                .override(70, 70)
+                //.centerCrop()
+                .into(feat1P);
 
 
         Glide.with(this)
-                .load(feat1Pic)
-                .override(300, 200)
-                // .centerCrop()
-                .into(feat1P);*/
+                .load(feat2Pic)
+                .override(70, 70)
+                .into(feat2P);
 
-//
-//        Feat_1.setText(feat1);
-//        Feat_2.setText(feat2);
-//        Feat_3.setText(feat3);
+
+        Glide.with(this)
+                .load(feat3Pic)
+                .override(70, 70)
+                .into(feat3P);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -209,14 +194,13 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
             }
         });
 
-
         //maps
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
 
-        // ------------------- chating things
+        // ------------------- reviews sections
         mUsername = ANONYMOUS;
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -268,7 +252,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getToken() instead.
 
-            String uid = user.getUid();
+              uid = user.getUid();
 
             mUsername = name;
         }
@@ -328,7 +312,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
                     reviews = dataSnapshot.getChildrenCount();
 
-                    mNumberReviews.setText(reviews + "\nreviews");
+                    //  ftitle1.setText(reviews + "\nreviews");
                     readAllReviews.setText("Read all " + reviews + " reviews");
                     mComments.add(friendlyMessage);
 
@@ -412,7 +396,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
 
         //reading the rating bar
-        mRateDatabaseReference.child("Rating").child(PlaceName).child(mAuth.getCurrentUser().getDisplayName()).addValueEventListener(new ValueEventListener() {
+       /* mRateDatabaseReference.child("Rating").child(PlaceName).child(mAuth.getCurrentUser().getDisplayName()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -422,11 +406,10 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
                     mRateDatabaseReference.child("Rating").child(PlaceName).child(mAuth.getCurrentUser().getDisplayName()).setValue(0);
                 } else {
 
-                    ratingBar.setRating(Float.parseFloat(dataSnapshot.getValue().toString()));
+                     ratingBar.setRating(Float.parseFloat(dataSnapshot.getValue().toString()));
 
 
                 }
-
 
             }
 
@@ -435,7 +418,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
             }
 
-        });
+        });*/
 
         //getting number total number of users and calc. the average
         mRateDatabaseReference.child("Rating").child(PlaceName).addValueEventListener(new ValueEventListener() {
@@ -457,7 +440,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
                  /*   DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
-                    ratingStars.setText(decimalFormat.format(mAverage) + "\n Stars");*/
+                    ftitle2.setText(decimalFormat.format(mAverage) + "\n Stars");*/
 
                     mTotalRating = 0;
 
@@ -476,7 +459,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
 
         //rating  the place
-        ratingStars = findViewById(R.id.btn_ratingStars);
+
         ratingRatingBar = findViewById(R.id.rating_rating_bar);
         ratingDisplayTextView = findViewById(R.id.rating_display_text_View);
         ratingRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -549,6 +532,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         i.putExtra("price", price);
         i.putExtra("email", email);
         i.putExtra("mUsername", mUsername);
+        i.putExtra("user_uid",uid);
 
         startActivity(i);
     }
