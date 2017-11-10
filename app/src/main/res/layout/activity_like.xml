@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+
+
+   <android.support.design.widget.FloatingActionButton
+       android:id="@+id/btnLike"
+       android:onClick="btnClicked"
+       android:layout_toRightOf="@+id/numLikes"
+       android:layout_marginLeft="5dp"
+       android:layout_width="50dp"
+       android:layout_height="50dp"/>
+
+   <TextView
+       android:id="@+id/numLikes"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="5dp"
+       android:layout_marginTop="10dp"
+       android:fontFamily="sans-serif"
+       android:textStyle="bold"
+       android:textSize="20dp"
+       android:textColor="#daa250"
+       android:text="0"/>
+</RelativeLayout>

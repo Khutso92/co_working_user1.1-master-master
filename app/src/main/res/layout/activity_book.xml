@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/BookPic"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/placeholder" />
+
+            <FrameLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="310dp"
+                android:layout_marginTop="4dp">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:elevation="0dp"
+                    app:borderWidth="1dp"
+                    app:fabSize="normal" />
+
+                <TextView
+                    android:id="@+id/txtPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="16dp"
+                    android:elevation="7dp"
+                    android:gravity="center_horizontal"
+                    android:textColor="#ffffff"
+                    tools:text="R78" />
+
+            </FrameLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <!--   <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="15dp"
+               android:layout_marginRight="15dp"
+               android:layout_marginTop="5dp"
+               android:orientation="vertical">
+
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal">
+
+                   <Button
+                       android:id="@+id/myDatePickerButton"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:layout_gravity="center_horizontal"
+                       android:background="@drawable/ic_perm_contact_calendar_black_24dp" />
+
+
+                   <TextView
+                       android:id="@+id/showMyDate"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginLeft="7dp"
+                       android:layout_marginTop="15dp"
+                       android:hint="date"
+                       android:textColorHint="#000"
+                       android:textSize="16sp"
+                       android:textStyle="bold|italic" />
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal">
+
+                   <Button
+                       android:id="@+id/button3"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:background="@drawable/ic_access_time_black_24dp" />
+
+                   <EditText
+                       android:id="@+id/EdtNumberHours"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginLeft="7dp"
+                       android:hint="no. of hrs"
+                       android:inputType="number"
+                       android:textColorHint="#000"
+                       android:textStyle="bold|italic" />
+
+               </LinearLayout>
+
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal">
+
+                   <Button
+                       android:id="@+id/Price_Order"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:background="@drawable/moneyrand"
+                       android:onClick="calPrice" />
+
+                   <TextView
+                       android:id="@+id/txtPrice"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginLeft="7dp"
+                       android:layout_marginTop="10dp"
+                       android:text="View amount"
+                       android:textColor="#000"
+                       android:textStyle="bold|italic" />
+
+               </LinearLayout>
+
+
+           </LinearLayout>-->
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="170dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_datePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#0E3047"
+                    android:padding="8dp"
+                    android:text="select date"
+                    android:textColor="#fff" />
+
+                <TextView
+
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/square"
+                    android:gravity="center"
+                    android:padding="13.8dp"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="100dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="16dp"
+
+                    android:layout_marginTop="12dp"
+
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+
+                        <Button
+                            android:id="@+id/btn_timePicker"
+                            android:layout_width="105dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/txt_TextDateTime"
+                            android:background="#196B69"
+                            android:text="Time in"
+
+                            android:textColor="#fff" />
+
+                        <TextView
+                            android:id="@+id/txt_TextDateTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:text="00:00"
+                            android:textColor="#0e3047"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/btn_timePickerOut"
+                            android:layout_width="105dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/txt_TextDateTime"
+                            android:layout_toRightOf="@+id/btn_timePicker"
+                            android:background="#197a78"
+                            android:text="Time out"
+
+                            android:textColor="#fff" />
+
+                        <TextView
+                            android:id="@+id/txt_TextDateTimeOut"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/txt_TextDateTime"
+                            android:text="00:00"
+                            android:textColor="#0e3047"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <RadioGroup
+                    android:id="@+id/RadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="NumPeople"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <RadioButton
+                        android:id="@+id/rb_onePerson"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:onClick="NumPeople"
+                        android:text="1 person"
+                        android:textAppearance="?android:textAppearanceMedium" />
+
+
+                    <RadioButton
+                        android:id="@+id/rb_MorePeople"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:onClick="NumPeople"
+                        android:text="more"
+                        android:textAppearance="?android:textAppearanceMedium" />
+
+                    <EditText
+                        android:id="@+id/edtPeopleNumber"
+                        android:layout_width="wrap_content"
+                        android:inputType="number"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3" />
+
+
+                </RadioGroup>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+
+
+                    <TextView
+                        android:id="@+id/txtTotalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:text="Total"
+                        android:textColor="#0e3047"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/Order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="60dp"
+                    android:background="#0E3047"
+                    android:onClick="email"
+                    android:text="Book now"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtPlace_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="12dp"
+                android:text="Display place name"
+                android:textColor="#196B69"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </android.support.v7.widget.CardView>
+
+    </FrameLayout>
+
+</LinearLayout>

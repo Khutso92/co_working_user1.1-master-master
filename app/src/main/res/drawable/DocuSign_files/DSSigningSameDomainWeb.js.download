@@ -1,0 +1,78 @@
+﻿// Use this script to make it easy to hook into the DSSigning API. 
+// NOTE: This script only works when the Signing experience is embedded in an iframe on a page from the same domain.
+//
+// CODE EXAMPLE:
+/*
+    DSSigning.ready(function () {
+        // Add handlers for DSSigning
+        DSSigning.handleMessage("sessionAboutToEnd", function () {
+            // Do stuff
+        });
+
+        // Initialize DSSigning
+        DSSigning.init({
+            suppress: {
+                sessionAboutToEndDialog: true
+            }
+        });
+
+        // Do some other stuff
+        DSSigning.zoomIn();
+    });
+*/
+(function (global) {
+    var DSSigning;
+    var iframeWindow;
+    var DS = {};
+    //--------------------------------------------------------------------------
+    // Collect ready callback to be executed once DSSigning is ready.
+    var readyCallbacks = [];
+    var readyFired = false;
+    function ready(callback) {
+        if (readyFired) {
+            callback.call(this, DS.signing, iframeWindow);
+        } else {
+            readyCallbacks.push(callback);
+        }
+    }
+    //--------------------------------------------------------------------------
+    function fireReady(DSSigning) {
+        for (var i = 0, len = readyCallbacks.length; i < len; i++) {
+            readyCallbacks[i](DSSigning, iframeWindow);
+        }
+        readyFired = true;
+    }
+    //--------------------------------------------------------------------------
+    // Extract reference to DSSigning from the page and execlute ready callbacks.
+    (function checkForDSSigning() {
+        setTimeout(function () {
+            // Check all iframes on the page to see if DSSigning is ready.
+            for (var i = 0, len = frames.length; i < len; i++) {
+                // Add try/catch to protect against js errors when browser extentions inject iframes into the page
+                try {
+                    if (frames[i].DSSigningReady) {
+                        DSSigning = frames[i].DSSigning;
+                        iframeWindow = frames[i];
+                        break;
+                    }
+                } catch (err) {
+                    // Do nothing
+                }
+            }
+
+            if (DSSigning) {
+                // Make DSSigning available
+                DS.signing = DSSigning;
+                fireReady(DSSigning, iframeWindow);
+            } else {
+                // Keep checking until DSSigning is there.
+                checkForDSSigning();
+            }
+        }, 20);
+    })();
+    //--------------------------------------------------------------------------
+    // Expose DS to consuming app
+    DS.ready = ready;
+    DS.isIframed = true;
+    global.DS = DS;
+})(this);

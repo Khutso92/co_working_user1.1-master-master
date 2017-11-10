@@ -1,0 +1,144 @@
+/** classic colors **/
+/** fun blue shades **/
+/** color varibles **/
+/** document colors **/
+/** btn colors **/
+/** olive colors **/
+/** stamps colors**/
+/** background colors **/
+/** font colors **/
+/** toolbar colors **/
+/** thumbnail drawer **/
+#error-page {
+  display: none;
+}
+.no-js #error-page,
+.browser-unsupported #error-page {
+  display: block;
+}
+#browser-unsupported {
+  display: none;
+}
+.browser-unsupported #browser-unsupported {
+  display: block;
+}
+#no-js {
+  display: none;
+}
+.no-js #no-js {
+  display: block;
+}
+.error-page body {
+  margin: 0;
+  background: #eaeaea;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 12px;
+}
+.error-page h1 {
+  font-family: 'Maven Pro', Arial, sans-serif;
+  font-size: 1.8em;
+  letter-spacing: 1px;
+  color: #333;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 0;
+}
+.error-page h3 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  color: #999;
+  margin: 13px 0;
+}
+.error-page .container {
+  width: 540px;
+  margin: 0 auto;
+}
+.error-page .top-area {
+  height: 67px;
+  background-color: #1b49a0;
+  position: relative;
+}
+.error-page .top-area .logo-wrapper {
+  position: absolute;
+  top: 21px;
+  left: 32px;
+  width: 125px;
+}
+.error-page .top-area .logo-wrapper .logo {
+  width: 113px;
+  border: none;
+}
+.error-page .top-area .help-wrapper {
+  position: absolute;
+  top: 25px;
+  right: 32px;
+}
+.error-page .top-area a.help-link {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.1em;
+  color: #b8c8db;
+  text-decoration: none;
+}
+.error-page .top-area a.help-link:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.error-page .error-header {
+  text-align: center;
+  padding: 20px;
+  margin-top: 60px;
+}
+.error-page .error-holder {
+  background: #fff;
+}
+.error-page .error-holder h4 {
+  font-size: 16px;
+}
+.error-page .error-holder h4 small {
+  display: block;
+  font-size: 0.8em;
+  font-weight: normal;
+}
+.error-page .error-holder table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.error-page .error-holder td {
+  vertical-align: middle;
+  text-align: left;
+  border-bottom: 1px solid #eaeaea;
+}
+.error-page .error-holder td.icon-cell {
+  width: 100px;
+}
+.error-page .error-holder td.icon-cell img {
+  height: 60px;
+  padding: 20px 30px;
+}
+.error-page .fine-print-footer {
+  clear: both;
+  padding: 16px 20px;
+  background: #fafafa;
+  color: #666;
+  line-height: 1.5em;
+}
+@media only screen and (max-width: 600px) {
+  .error-page .container {
+    width: 480px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .error-page .container {
+    width: auto;
+  }
+  .error-page .error-header {
+    margin-top: 0px;
+  }
+  .error-page .error-holder .icon-cell {
+    width: 80px;
+  }
+  .error-page .error-holder .icon-cell img {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,150 @@
+/*-----------------------*/
+
+/* needs brackets to swallow error on dev */
+{
+}
+
+body {
+  overflow: auto !important;
+  width: 100% !important;
+}
+
+/* Make Signing fill full width */
+.Border{
+    width: 100% !important;
+}
+
+.NavHolder {
+  -webkit-transition: top .5s; /* For Safari 3.1 to 6.0 */
+  transition: top .5s;
+  position: fixed;
+  margin-left: -81px;
+  left: auto;
+  z-index: 99; /* so autonav isn't covered by markup sidebar (freeform pallette) */
+}
+
+.BodyHolder {
+  background-color: #eaeaea;
+}
+
+/* The Approve button has a default width of 80pxs and does resize correctly */
+/*Commenting this out for now until we figure out what to do with approve and decline tag width*/
+/*[tabtype="Approve"] > button {
+  width: auto !important;
+}*/
+
+
+.PagesHolder {
+  text-align: left;
+  position: relative;
+  display: table;
+  margin: 0 auto;
+  /* Get rid of border on focus */
+  outline: none;
+  /* Get rid of horizontal scrollbar unless needed */
+  overflow: visible;
+  background-color: #eaeaea;
+  border: none !important;
+  /* this transition is for when the free form palette comes into view on page load */
+  -webkit-transition: padding-left .5s; /* For Safari 3.1 to 6.0 */
+  transition: padding-left .5s;
+}
+
+/* Make Signing fill full height */
+.PagesHolder, .BodyHolder, #ds_hldrBdy_ctrlContent, .FormBody, .Border, form, body, html {
+    /* min-height: 100% !important; */
+}
+
+/* Remove borders */
+.BodyHolder {
+    border: none !important;
+}
+
+/* Center pages */
+.Page, .PageIdentifier {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Get rid of extra space at bottom end of document area */
+.Page, .PageIdentifier {
+    margin-top: 0 !important;
+}
+.PageIdentifier {
+    font-size: 12px;
+    color: #666666;
+    /* the last identifier allows more space so that the auto nav can position elements low on the last page into the middle
+        We should consider allowing the auto nav carrot to travel down the frame to point to a lower tag on the last page 
+        instead of putting in the space.
+         min-height: 0 !important;*/
+    height: 44px;
+}
+
+.PageSpace {
+  height: 24px;
+}
+
+/* Hide footer (should be removed from DOM, but isn't for some reason) */
+.Footer {
+    display: none !important;
+}
+
+.CompleteSigning, .GeneralDialog {
+    position:fixed !important;
+}
+
+.close-dialog-x {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: url('../images/icons/icon_close.png');
+    background-repeat: no-repeat;
+    height: 14px;
+    width: 14px;
+    margin: 0;
+}
+
+/* Supress Note popup */
+#ds_hldrBdy_navnote {
+    display:none !important;
+}
+
+/* Fix for someone adding a ridiculous number of CC's to the Sign and Return dialog - scroll! */
+#ds_hldrBdy_dlgComplete.CompleteSigning .DiaSignDialog {
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+/* When signing is embedded, dialogs get cut off... */
+@media only screen and (max-height : 480px) {
+
+    #ds_hldrBdy_dlgComplete.CompleteSigning {
+        width: 640px;
+    }
+
+    #ds_hldrBdy_dlgComplete.CompleteSigning .DiaHTSignDialog {
+        padding: 12px;
+    }
+
+    #ds_hldrBdy_dlgComplete.CompleteSigning .DiaSignDialog {
+        padding: 12px;
+        max-height: 250px;
+        overflow-y: auto;
+    }
+
+    #ds_hldrBdy_dlgComplete.CompleteSigning .DiaSignDialog #askConsumerEmail div[index="1"] {
+        position: absolute !important;
+        width: 280px !important;
+        top: 32px;
+        right: 0;
+    }
+
+    #ds_hldrBdy_dlgComplete.CompleteSigning .DiaSignDialog #askConsumerEmail #consumerfieldsDiv {
+        position: relative !important;
+        width: 300px !important;
+        top: auto;
+        right: auto;
+    }
+}
+
+/*-----------------------*/
