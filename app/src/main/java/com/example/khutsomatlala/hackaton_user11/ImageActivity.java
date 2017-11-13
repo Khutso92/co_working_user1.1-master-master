@@ -56,8 +56,8 @@ public class ImageActivity extends AppCompatActivity {
                     if (dataSnapshot.hasChildren()) {
                         System.out.println(dataSnapshot.getChildrenCount());
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            System.out.println(snapshot.child("urI").getValue());
-                            images.add(snapshot.child("urI").getValue().toString());
+                            System.out.println(snapshot.child("details").child("cover_photo").getValue());
+
                             //images.add(snapshot.child("url2").getValue().toString());
                             //images.add(snapshot.child("url3").getValue().toString());
                         }
